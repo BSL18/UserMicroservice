@@ -1,0 +1,38 @@
+type User {
+    id: ID!
+    username: String!
+    email: String!
+    role: String!
+}
+
+input RegisterInput {
+    username: String!
+    email: String!
+    password: String!
+    role: UserRole
+}
+
+enum UserRole {
+    ADMIN
+    USER
+}
+
+input LoginInput {
+    email: String!
+    password: String!
+}
+
+type AuthData {
+    userId: ID!
+    token: String!
+    tokenExpiration: Int!
+}
+
+type Mutation {
+    registerUser(input: RegisterInput): User!
+    loginUser(input: LoginInput): AuthData!
+}
+
+type Query {
+    getUser(id: ID!): User
+}
